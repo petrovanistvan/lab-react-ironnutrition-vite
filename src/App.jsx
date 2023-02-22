@@ -9,33 +9,39 @@ import Search from "./assets/components/Search";
 
 function App() {
   const [foodsState, setFoodsState] = useState(foods);
-
+  const [searchState, setSearchState] = useState("");
+  const handleDelete = (e, foodToDelete) => {
+    e.preventDefault();
+    const updatedFoods = foodsState.filter((food) => food !== foodToDelete);
+    setFoodsState(updatedFoods);
+  };
 
   function handleSubmit(e, newFood) {
     e.preventDefault();
-    console.log(newFood);
     setFoodsState([...foodsState, newFood]); 
   }
   
-    const handleSearch = (searchTerm) => {
-      const filteredFoods = foods.filter((food) => {
-        return food.name.toLowerCase().includes(searchTerm.toLowerCase());
-      });
-      setFoodsState(filteredFoods);
-    };
+  const handleSearch = (searchTerm) => {
+    const filteredFoods = foodsState.filter((food) => {
+      return food.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setFoodsState(filteredFoods);
+  };
 
   return (
     <div className='App'>
-      <Search onSearch = {handleSearch}/>
+      <Search searchState = {searchState} setSearchState = {setSearchState}/>
       
       <AddFoodForm handleSubmit = {handleSubmit}/>
       
       <Divider>Food List</Divider>
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {foodsState.map((food) => {
+        {foodsState.filter((food) => {
+      return food.name.toLowerCase().includes(searchState.toLowerCase());
+    }).map((food) => {
           return (
             <Col key={food.name}>
-              <FoodBox food={food} />
+              <FoodBox food={food} onDelete={handleDelete}/>
             </Col>
           );
         })}

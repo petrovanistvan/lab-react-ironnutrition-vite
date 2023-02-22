@@ -1,6 +1,10 @@
 import { Card, Row, Col, Divider, Input, Button } from 'antd';
 
-function FoodBox({food}) {
+function FoodBox({ food, onDelete }) {
+    const handleDelete = (e) => {
+      onDelete(e, food);
+    }
+
     return (
       <Card
         title={food.name}
@@ -12,9 +16,14 @@ function FoodBox({food}) {
         <p>
           <b>Total Calories: {food.calories * food.servings} </b> kcal
         </p>
-        <Button type="primary"> Delete </Button>
+        <button type="submit" onClick={handleDelete}>delete stuff</button>
       </Card>
     );
   }
   
   export default FoodBox;
+
+//   function submitButton(e) {
+//     handleSubmit(e, newFood);
+//     setNewFood({name:"", image:"", calories:"", servings:""});
+// }
