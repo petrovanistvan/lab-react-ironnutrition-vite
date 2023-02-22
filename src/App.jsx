@@ -4,14 +4,15 @@ import './App.css';
 import { Card, Row, Col, Divider, Input, Button } from 'antd';
 import foods from './foods.json';
 import FoodBox from "./assets/components/FoodBox";
+import AddFoodForm from "./assets/components/AddFoodForm";
 
 function App() {
   const [foodsState, setFoodsState] = useState(foods);
   const [showForm, setShowForm] = useState(false);
 
-  const handleToggleForm = () => {
-    setShowForm(!showForm);
-  };
+  // const handleToggleForm = () => {
+  //   setShowForm(!showForm);
+  // };
 
   const handleAddFood = (food) => {
     setFoodsState([...foodsState, food]);
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <div className='App'>
-      {showForm ? (
+      {/* {showForm ? (
         <div>
           <Input placeholder="Name" />
           <Input placeholder="Calories" />
@@ -37,7 +38,8 @@ function App() {
         </div>
       ) : (
         <Button onClick={handleToggleForm}>Hide Form / Add New Food</Button>
-      )}
+      )} */}
+      
       <Input placeholder="Search" onChange={handleSearch} />
       <Divider>Food List</Divider>
       <Row style={{ width: '100%', justifyContent: 'center' }}>
